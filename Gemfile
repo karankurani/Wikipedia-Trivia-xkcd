@@ -6,7 +6,7 @@ source 'http://gemcutter.org'
 
 gem 'rails', '3.0.7'
 gem 'mongo_mapper'
-gem 'wikipedia-client'
+gem 'wikipedia-client', :path => './vendor/gems/wikipedia-client-1.0.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

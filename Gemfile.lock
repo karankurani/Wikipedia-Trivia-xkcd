@@ -1,3 +1,8 @@
+PATH
+  remote: ./vendor/gems/wikipedia-client-1.0.0
+  specs:
+    wikipedia-client (1.0.0)
+
 GEM
   remote: http://rubygems.org/
   remote: http://gemcutter.org/
@@ -73,7 +78,6 @@ GEM
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.27)
-    wikipedia-client (1.0.0)
 
 PLATFORMS
   ruby
@@ -81,4 +85,4 @@ PLATFORMS
 DEPENDENCIES
   mongo_mapper
   rails (= 3.0.7)
-  wikipedia-client
+  wikipedia-client!

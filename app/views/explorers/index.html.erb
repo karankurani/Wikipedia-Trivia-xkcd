@@ -3,7 +3,8 @@
   <%= text_field_tag(:Wikipedia_Title) %>
   <%= submit_tag("Search") %>
 <% end %>
-  <%= label_tag(:Link_tag, "Link Tag:") %>
-  <%= @explorer.source_link %> <br />
-  <%= label_tag(:Path_hash, "Path Hash:") %>
-  <%= @explorer.path_hash %>
+<%= label_tag(:Link_tag, "Link Tag:") %>
+<%= @explorer.source_link unless @explorer.nil? %> <br />
+<%= label_tag(:Path_hash, "Path Hash:") %>
+<%= @explorer.path_hash unless @explorer.nil? %>
+

@@ -2,5 +2,6 @@
 <% @links.each do |link| %>
 <%= link.link_name.gsub('[[','').gsub(']]','')  %>
 <%= link.distance %>
-<%= link.next_link %> <br />
+<%= link.next_link %> 
+<%= link.type %> <br />
 <% end %>
