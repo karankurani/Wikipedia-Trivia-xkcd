@@ -1,5 +1,6 @@
 WikipediaFirst::Application.routes.draw do
   match "links" => "links#index"
+  match "random" => "explorers#random"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

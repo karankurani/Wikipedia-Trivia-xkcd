@@ -1,3 +1,4 @@
+<h2><%= link_to "Get the path for a random page.", random_path %></h2>
 <%= form_tag({:controller => "explorers"}, :method => "get") do %>
   <%= label_tag(:Wikipedia_Title, "Search for:") %>
   <%= text_field_tag(:Wikipedia_Title) %>
@@ -5,6 +6,6 @@
 <% end %>
 <%= label_tag(:Link_tag, "Link Tag:") %>
 <%= @explorer.source_link unless @explorer.nil? %> <br />
-<%= label_tag(:Path_hash, "Path Hash:") %>
+<%= label_tag(:New_Path, "New Path:") %>
 <%= @explorer.path_hash unless @explorer.nil? %>
 
