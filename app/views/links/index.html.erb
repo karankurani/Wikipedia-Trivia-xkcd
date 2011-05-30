@@ -1,0 +1,6 @@
+<h1>Links</h1>
+<% @links.each do |link| %>
+<%= link.link_name.gsub('[[','').gsub(']]','')  %>
+<%= link.distance %>
+<%= link.next_link %> <br />
+<% end %>
