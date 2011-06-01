@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 source 'http://gemcutter.org'
 
 gem 'rails', '3.0.7'
+gem 'json'
 gem 'mongo'
 gem 'mongo_mapper'
 gem 'wikipedia-client', :path => './vendor/gems/wikipedia-client-1.0.0'
