@@ -43,13 +43,13 @@ class Explorer
     while(current_link.downcase != "[[philosophy]]")
       link_in_database = Link.first(:link_name => current_link)      
       #If already in database then break the loop.
-      if !link_in_database.nil?
+      unless link_in_database.nil?
         update_hash_from_db(link_in_database)
         break;
       end
                 
       #if link already encountered then its a cycle.      
-      if !path_hash[current_link].nil?
+      unless path_hash[current_link].nil?
         @type = "cycle"
         break;
       end      
@@ -83,7 +83,7 @@ class Explorer
     
     save_to_db
     
-    if !link_in_database.nil?
+    unless link_in_database.nil?
       get_database_path(link_in_database)
       @type = @database_path.first.type
     end

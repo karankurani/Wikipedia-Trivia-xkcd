@@ -1,11 +1,14 @@
 <h2><%= link_to "Get the path for a random page.", random_path %></h2>
+
 <%= form_tag({:controller => "explorers"}, :method => "get") do %>
   <%= label_tag(:Wikipedia_Title, "Search for:") %>
   <%= text_field_tag(:Wikipedia_Title) %>
   <%= submit_tag("Search") %>
 <% end %>
+
 <%= @message %>
-<% if !@explorer.nil? %>
+
+<% unless @explorer.nil? %>
   <%= label_tag(:Link_tag, "Link Tag:") %>
   <%= @explorer.source_link %> <br />
   <h3><%= label_tag(:New_Path, "New Path Found:") %></h3>
@@ -14,7 +17,7 @@
     <%= key.gsub('_',' ') + "=>" + value[1].gsub('_',' ')%>
   <% end %>
     
-  <% if !@explorer.database_path.nil? %>
+  <% unless @explorer.database_path.nil? %>
     <h3><%= label_tag(:Old_Path, "Path already in database:") %></h3>
     <% @explorer.database_path.each do |link| %>
       <br />

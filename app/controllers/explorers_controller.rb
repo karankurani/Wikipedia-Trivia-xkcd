@@ -1,7 +1,7 @@
 require 'wikipedia'
 class ExplorersController < ApplicationController
   def index
-    if (!params[:Wikipedia_Title].blank?)
+    unless params[:Wikipedia_Title].blank?
       @message = ""
       @explorer = Explorer.new(params[:Wikipedia_Title])
       @explorer.explore

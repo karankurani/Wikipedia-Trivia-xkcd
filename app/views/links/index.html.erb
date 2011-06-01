@@ -1,7 +1,15 @@
-<h1>Links</h1>
-<% @links.each do |link| %>
-<%= link.link_name.gsub('[[','').gsub(']]','')  %>
-<%= link.distance %>
-<%= link.next_link %> 
-<%= link.type %> <br />
+<%= form_tag({:controller => "links"}, :method => "get") do %>
+  <%= label_tag(:link_distance, "Link Level:") %>
+  <%= text_field_tag(:link_distance) %>
+  <%= submit_tag("Search for links at this level") %>
+<% end %>
+
+<% unless @links.blank? %>
+  <h1>Links at distance <%= params[:link_distance] %> </h1>
+  <% @links.each do |link| %>
+  <%= link.link_name.gsub('[[','').gsub(']]','')  %>
+  <%= link.distance %>
+  <%= link.next_link %> 
+  <%= link.type %> <br />
+  <% end %>
 <% end %>
