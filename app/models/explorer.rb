@@ -1,3 +1,4 @@
+require 'wikipedia'
 class Explorer
   attr_accessor :source_link, :path_hash, :type, :database_path
   

@@ -1,3 +1,4 @@
+require 'wikipedia'
 class ExplorersController < ApplicationController
   def index
     if (!params[:Wikipedia_Title].blank?)
