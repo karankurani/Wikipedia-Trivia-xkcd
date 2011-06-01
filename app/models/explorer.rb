@@ -122,6 +122,8 @@ class Explorer
     content.gsub!(/\[\[File:.*?\]\]/,'')
     content.gsub!(/\[\[image:.*?\]\]/,'')
     content.gsub!(/\[\[file:.*?\]\]/,'')
+    #remove any link with colons in it
+    content.gsub!(/\[\[.*?:.*?\]\]/,'')
     #gets the first link
     content = content.slice(/\[\[.*?\]\]/)
     #replaces spaces with underscores (for correct resolving of links)
