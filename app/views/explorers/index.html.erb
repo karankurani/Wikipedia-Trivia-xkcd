@@ -4,8 +4,24 @@
   <%= text_field_tag(:Wikipedia_Title) %>
   <%= submit_tag("Search") %>
 <% end %>
-<%= label_tag(:Link_tag, "Link Tag:") %>
-<%= @explorer.source_link unless @explorer.nil? %> <br />
-<%= label_tag(:New_Path, "New Path:") %>
-<%= @explorer.path_hash unless @explorer.nil? %>
-
+<%= @message %>
+<% if !@explorer.nil? %>
+  <%= label_tag(:Link_tag, "Link Tag:") %>
+  <%= @explorer.source_link %> <br />
+  <h3><%= label_tag(:New_Path, "New Path Found:") %></h3>
+  <% @explorer.path_hash.each_pair do |key,value|  %>
+    <br/>
+    <%= key.gsub('_',' ') + "=>" + value[1].gsub('_',' ')%>
+  <% end %>
+    
+  <% if !@explorer.database_path.nil? %>
+    <h3><%= label_tag(:Old_Path, "Path already in database:") %></h3>
+    <% @explorer.database_path.each do |link| %>
+      <br />
+      <%= link.link_name.gsub('_',' ') + "=>" + link.next_link.gsub('_',' ') %> 
+    <% end %>
+  <% end %>
+  
+  <h3><%= label_tag(:Type, "Type of path: ") %></h3>
+  <%= @explorer.type %>
+<% end %>

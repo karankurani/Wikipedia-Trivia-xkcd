@@ -1,13 +1,14 @@
 class Explorer
-  attr_accessor :source_link, :path_hash, :type
+  attr_accessor :source_link, :path_hash, :type, :database_path
   
   #intializes the explorer
   def initialize(link)
     @source_link = "[[" + link.gsub(' ', '_') + "]]"
     @path_hash = Hash.new
     type = nil
+    @database_path = nil
   end
-  
+
   def insert_link_update_path_hash(current_link, next_link)
     path_hash[current_link] = Array.new
     path_hash[current_link][0] = 0
@@ -51,14 +52,20 @@ class Explorer
         @type = "cycle"
         break;
       end      
+      #Get the page and its contents.
       page = Wikipedia.find(current_link.gsub(/\[/,'').gsub(/\]/,''))
+      if page.nil?
+        @type = "dead-end"
+        break;
+      end      
       content = page.content
+      #Get the first link from the content.
       next_link = get_first_link(content)
-      
       if next_link.nil?
         @type = "dead-end"
         break;
       end
+      
       insert_link_update_path_hash(current_link, next_link)
       current_link = next_link
       next_link = nil
@@ -68,9 +75,29 @@ class Explorer
     if @type.nil?
       @type = "philosophy"
     end
+    
     save_to_db
+    
+    if !link_in_database.nil?
+      get_database_path(link_in_database)
+      @type = @database_path.first.type
+    end
   end #end explore
 
+  def get_database_path(link_in_database)
+      @database_path = Array.new
+      i = 0
+      while !link_in_database.nil?
+        @database_path[i] = link_in_database
+        i = i + 1
+        link_in_database = Link.first(:link_name => link_in_database.next_link)
+        #incase of cycles then break
+        if @database_path.include? link_in_database
+          break;
+        end
+      end
+  end
+  
   #For the given page_content it gets the first link. 
   def get_first_link(content)
     #Remove curly braces
@@ -87,8 +114,10 @@ class Explorer
     #remove italic text
     content.gsub!(/''(.+?)''/,'')
     #remove images and file links
-    content.gsub!(/\[\[Image:.*\]\]/,'')
-    content.gsub!(/\[\[File:.*\]\]/,'')
+    content.gsub!(/\[\[Image:.*?\]\]/,'')
+    content.gsub!(/\[\[File:.*?\]\]/,'')
+    content.gsub!(/\[\[image:.*?\]\]/,'')
+    content.gsub!(/\[\[file:.*?\]\]/,'')
     #gets the first link
     content = content.slice(/\[\[.*?\]\]/)
     #replaces spaces with underscores (for correct resolving of links)
