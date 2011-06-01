@@ -59,6 +59,10 @@ class Explorer
         break;
       end      
       content = page.content
+      if content.nil?
+        @type = "dead-end"
+        break;
+      end
       #Get the first link from the content.
       next_link = get_first_link(content)
       if next_link.nil?
