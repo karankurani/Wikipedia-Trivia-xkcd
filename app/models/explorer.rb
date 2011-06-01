@@ -34,6 +34,7 @@ class Explorer
     path_hash.each_pair do |key,value|
       path_hash[key][0] = path_hash[key][0] + link_in_database.distance
     end
+    @type = link_in_database.type
   end
 
   #for the given source_link it starts to follow first links in each page until it reaches philosophy 
@@ -105,6 +106,7 @@ class Explorer
   
   #For the given page_content it gets the first link. 
   def get_first_link(content)
+  
     #Remove curly braces
     while content =~ /\{\{[^\{\\}]+?\}\}/
 	    content.gsub!(/\{\{[^\{\}]+?\}\}/,'')
@@ -124,7 +126,7 @@ class Explorer
     content.gsub!(/\[\[image:.*?\]\]/,'')
     content.gsub!(/\[\[file:.*?\]\]/,'')
     #remove any link with colons in it
-    content.gsub!(/\[\[.*?:.*?\]\]/,'')
+    #content.gsub!(/\[\[.*?:.*?\]\]/,'')
     #gets the first link
     content = content.slice(/\[\[.*?\]\]/)
     #replaces spaces with underscores (for correct resolving of links)

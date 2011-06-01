@@ -6,10 +6,19 @@
 
 <% unless @links.blank? %>
   <h1>Links at distance <%= params[:link_distance] %> </h1>
+  <table align="center">
+  <tr align="left">
+  <th>Link Name</th>
+  <th>Links to</th>
+  <th>Ends as</th>
+  </tr>
   <% @links.each do |link| %>
-  <%= link.link_name.gsub('[[','').gsub(']]','')  %>
-  <%= link.distance %>
-  <%= link.next_link %> 
-  <%= link.type %> <br />
+  <tr>  
+  <td> <%= link.link_name.gsub('[[','').gsub(']]','')  %> </td>
+  <td> <%= link.next_link %> </td>
+  <td> <%= link.type %> </td>
+  </tr>
   <% end %>
+  </table>
 <% end %>
+<br/> Distance in cycle and deadend do not make sense
