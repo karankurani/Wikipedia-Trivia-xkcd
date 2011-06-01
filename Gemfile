@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 source 'http://gemcutter.org'
-
+require 'wikipedia'
 gem 'rails', '3.0.7'
 gem 'mongo'
 gem 'mongo_mapper'
